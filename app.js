@@ -7,8 +7,7 @@ let operatorPressed = false;
 let operatorSign = null; // will be "+", "-" and so on
 let operator = null; // will be "add", "subtract" and so on
 
-const digitsContainer = document.querySelector(".digits-container");
-const digits = digitsContainer.querySelectorAll("button");
+const digits = document.querySelectorAll(".digit");
 digits.forEach(digit => {
     digit.addEventListener("click", (e) => {
 
@@ -35,8 +34,20 @@ digits.forEach(digit => {
     })
 })
 
-const operatorsContainer = document.querySelector(".operators-container");
-const operators = operatorsContainer.querySelectorAll("button");
+const dotBtn = document.querySelector(".dot");
+dotBtn.addEventListener("click", () => {
+    if(operatorPressed && secNum.length != 0 && !secNum.includes(".")) {
+        secNum.push(".")
+        display.textContent = firstNum.join("") + " " + operatorSign + " " + secNum.join("");
+    } else if(firstNum.length != 0 && !firstNum.includes(".") && resNum.length == 0) {
+        firstNum.push(".")
+        display.textContent = firstNum.join("")
+    } 
+    
+
+})
+
+const operators = document.querySelectorAll(".operator");
 operators.forEach(operatorBtn => {
     operatorBtn.addEventListener("click", (e) => {
         if(firstNum.length == 0) return; //if there is no number on screen deactivate btn
